@@ -1,4 +1,3 @@
-
 import helpers.ConsoleColours;
 import helpers.InputReader;
 
@@ -15,6 +14,10 @@ public class App {
             System.out.println();
             System.out.println();
 
+            Options();
+    }
+    public static void Options()
+    {
             /// Prompts to choose an option
             System.out.println("1. Add a new song to the list of songs");
             System.out.println("2. Remove a song from the list of songs");
@@ -25,27 +28,42 @@ public class App {
             System.out.println("");
             String input = InputReader.getString("Enter your choice > ");
 
-            /// Switch statement to choose an option
+                        /// Switch statement to choose an option
             switch (input) 
             {
                 case "1":
+                    System.out.println("");
                     System.out.println("option 1 selected");
+                    System.out.println("");
+                    Options();
                     break;
                 case "2":
+                    System.out.println("");
                     System.out.println("option 2 selected");
+                    System.out.println("");
+                    Options();
                     break;
                 case "3":
+                    System.out.println("");
                     System.out.println("option 3 selected");
+                    System.out.println("");
+                    Options();
                     break;
                 case "4":
+                    System.out.println("");
                     System.out.println("option 4 selected");
+                    System.out.println("");
+                    Options();
                     break;
                 case "close":
+                    System.out.println("");
                     System.out.println("Thank you for Using");
                     System.out.println("Application Closed");
+                    System.out.println("");
                     System.exit(0);
                 default:
                     break;
             }
     }
+
 }
