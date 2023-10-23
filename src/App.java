@@ -54,9 +54,7 @@ public class App {
                     
                     break;
                 case "3":
-                    System.out.println("");
-                    System.out.println("option 3 selected");
-                    System.out.println("");
+                    displayAllSongs();
                     ValidInput = true;
                     
                     break;
@@ -86,8 +84,10 @@ public class App {
 
     public static void AddNewSong() 
     {
+        /// method to add a new song to the list
         System.out.println("");
         System.out.println("Enter the details of the song:");
+        System.out.println("");
         String title = InputReader.getString("Title: ");
         String artist = InputReader.getString("Artist: ");
         String playCount = InputReader.getString("Play Count: ");
@@ -100,6 +100,37 @@ public class App {
         System.out.println(ConsoleColours.ANSI_CYAN);
         System.out.println("");
         Options();
+    }
+
+    public static void displayAllSongs() 
+    {
+        /// method to display all songs in the list
+        System.out.println("");
+        if (songDetails.isEmpty()) 
+        {
+            /// display error message if the list is empty
+            System.out.println(ConsoleColours.ANSI_YELLOW);
+            System.out.println("No songs added yet.");
+            System.out.println(ConsoleColours.ANSI_CYAN);
+            System.out.println("");
+            Options();
+        } 
+        else 
+        {
+            /// display all songs in the list as a table
+            System.out.println("List of all songs:");
+            System.out.println("");
+            System.out.println("-----------------------------------------------------------------------------------");
+            System.out.printf("\u001B[36m|\u001B[40m \u001B[31m%-20s\u001B[40m \u001B[36m|\u001B[40m \u001B[31m%-20s\u001B[40m \u001B[36m|\u001B[40m \u001B[31m%-15s\u001B[40m \u001B[36m|\u001B[40m \u001B[31m%-15s\u001B[40m \u001B[36m|\u001B[40m\n", "Title", "Artist", "Play Count", "Year Released");
+            
+            for (String key : songDetails.keySet()) {
+                String[] details = songDetails.get(key);
+                System.out.println(ConsoleColours.ANSI_CYAN + "-----------------------------------------------------------------------------------");
+                System.out.printf("| \u001B[36m%-20s\u001B[40m | \u001B[36m%-20s\u001B[40m | \u001B[36m%-15s\u001B[40m | \u001B[36m%-15s\u001B[40m |\n", details[0], details[1], details[2], details[3]);
+            }
+            System.out.println("-----------------------------------------------------------------------------------");
+        }
+        System.out.println("");
     }
 
 }
