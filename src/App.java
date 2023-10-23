@@ -5,12 +5,14 @@ public class App {
     public static void main(String[] args) throws Exception 
     {
         
-            System.out.println(ConsoleColours.ANSI_BG_CYAN);
+            System.out.println(ConsoleColours.ANSI_BG_BLACK);
             System.out.println(ConsoleColours.CONSOLE_CLEAR);
+            System.out.println(ConsoleColours.ANSI_RED);
             System.out.println("====================================");
             System.out.println("CO452 Programming Concepts 2023/2024");
             System.out.println("         by Muneef Mumthas          ");
             System.out.println("====================================");
+            System.out.println(ConsoleColours.ANSI_CYAN);
             System.out.println();
             System.out.println();
 
@@ -64,12 +66,16 @@ public class App {
                     break;
                 case "5":
                     System.out.println("");
+                    System.out.println(ConsoleColours.ANSI_YELLOW);
                     System.out.println("Application Closed");
+                    System.out.println(ConsoleColours.ANSI_CYAN);
                     System.out.println("");
                     System.exit(0);
                 default:
                     System.out.println("");
+                    System.out.println(ConsoleColours.ANSI_YELLOW);
                     System.out.println("Invalid input. Please try again.");
+                    System.out.println(ConsoleColours.ANSI_CYAN);
                     System.out.println("");
             }
         }
