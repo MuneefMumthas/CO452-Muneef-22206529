@@ -1,7 +1,11 @@
 import helpers.ConsoleColours;
 import helpers.InputReader;
+import java.util.HashMap;
+import java.util.Map;
 
 public class App {
+
+    static Map<String, String[]> songDetails = new HashMap<>();
     public static void main(String[] args) throws Exception 
     {
         
@@ -38,8 +42,7 @@ public class App {
             {
                 case "1":
                     System.out.println("");
-                    System.out.println("option 1 selected");
-                    System.out.println("");
+                    AddNewSong();
                     ValidInput = true;
                     
                     break;
@@ -80,4 +83,23 @@ public class App {
             }
         }
     }
+
+    public static void AddNewSong() 
+    {
+        System.out.println("");
+        System.out.println("Enter the details of the song:");
+        String title = InputReader.getString("Title: ");
+        String artist = InputReader.getString("Artist: ");
+        String playCount = InputReader.getString("Play Count: ");
+        String yearReleased = InputReader.getString("Year Released: ");
+        String[] details = {title, artist, playCount, yearReleased};
+        songDetails.put(title, details);
+        System.out.println("");
+        System.out.println(ConsoleColours.ANSI_GREEN);
+        System.out.println("Song added successfully.");
+        System.out.println(ConsoleColours.ANSI_CYAN);
+        System.out.println("");
+        Options();
+    }
+
 }
