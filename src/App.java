@@ -48,7 +48,7 @@ public class App {
                     break;
                 case "2":
                     System.out.println("");
-                    System.out.println("option 2 selected");
+                    RemoveSong();
                     System.out.println("");
                     ValidInput = true;
                     
@@ -132,6 +132,41 @@ public class App {
         }
         System.out.println("");
         Options();
+    }
+
+    public static void RemoveSong() 
+    {
+        System.out.println("");
+        if (songDetails.isEmpty()) 
+        {
+            System.out.println(ConsoleColours.ANSI_YELLOW);
+            System.out.println("No songs added yet.");
+            System.out.println(ConsoleColours.ANSI_CYAN);
+            System.out.println("");
+            Options();
+        } 
+        else 
+        {
+            String title = InputReader.getString("Enter the title of the song you want to remove: ");
+            if (songDetails.containsKey(title)) 
+            {
+                songDetails.remove(title);
+                System.out.println("");
+                System.out.println(ConsoleColours.ANSI_GREEN);
+                System.out.println("Song removed successfully.");
+                System.out.println(ConsoleColours.ANSI_CYAN);
+                System.out.println("");
+            } 
+            else 
+            {
+                System.out.println("");
+                System.out.println(ConsoleColours.ANSI_YELLOW);
+                System.out.println("Song not found in the list.");
+                System.out.println(ConsoleColours.ANSI_CYAN);
+                System.out.println("");
+            }
+            Options();
+        }
     }
 
 }
