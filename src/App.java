@@ -90,8 +90,44 @@ public class App {
         System.out.println("");
         String title = InputReader.getString("Title: ");
         String artist = InputReader.getString("Artist: ");
-        String playCount = InputReader.getString("Play Count: ");
-        String yearReleased = InputReader.getString("Year Released: ");
+
+        String playCount;
+        while (true) 
+        {
+            playCount = InputReader.getString("Play Count: ");
+            
+            if (playCount.matches("\\d+")) 
+            {
+                break;
+            } 
+
+            else 
+            {
+                /// error message if the play count is not a number
+                System.out.println(ConsoleColours.ANSI_YELLOW);
+                System.out.println("Please enter a valid number for Play Count.");
+                System.out.println(ConsoleColours.ANSI_CYAN);
+            }
+        }
+
+        String yearReleased;
+        while (true) 
+        {
+            yearReleased = InputReader.getString("Year Released: ");
+            if (yearReleased.matches("\\d{4}")) 
+            {
+                break;
+            } 
+
+            else 
+            {
+                /// error message if the year is not 4 digits
+                System.out.println(ConsoleColours.ANSI_YELLOW);
+                System.out.println("Please enter a valid 4-digit year for Year Released.");
+                System.out.println(ConsoleColours.ANSI_CYAN);
+            }
+        }
+        
         String[] details = {title, artist, playCount, yearReleased};
         songDetails.put(title, details);
 
@@ -167,7 +203,7 @@ public class App {
                 /// error message if the song is not in the list
                 System.out.println("");
                 System.out.println(ConsoleColours.ANSI_YELLOW);
-                System.out.println("Song not found in the list.");
+                System.out.println("Song not found in the list. Please check the title and try again.");
                 System.out.println(ConsoleColours.ANSI_CYAN);
                 System.out.println("");
             }
