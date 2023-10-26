@@ -94,6 +94,8 @@ public class App {
         String yearReleased = InputReader.getString("Year Released: ");
         String[] details = {title, artist, playCount, yearReleased};
         songDetails.put(title, details);
+
+        /// confirmation when the song is added
         System.out.println("");
         System.out.println(ConsoleColours.ANSI_GREEN);
         System.out.println("Song added successfully.");
@@ -136,9 +138,11 @@ public class App {
 
     public static void RemoveSong() 
     {
+        /// method to remove a song from the list
         System.out.println("");
         if (songDetails.isEmpty()) 
         {
+            /// display error message if the list is empty
             System.out.println(ConsoleColours.ANSI_YELLOW);
             System.out.println("No songs added yet.");
             System.out.println(ConsoleColours.ANSI_CYAN);
@@ -150,6 +154,7 @@ public class App {
             String title = InputReader.getString("Enter the title of the song you want to remove: ");
             if (songDetails.containsKey(title)) 
             {
+                /// confirmation when the song is removed
                 songDetails.remove(title);
                 System.out.println("");
                 System.out.println(ConsoleColours.ANSI_GREEN);
@@ -159,6 +164,7 @@ public class App {
             } 
             else 
             {
+                /// error message if the song is not in the list
                 System.out.println("");
                 System.out.println(ConsoleColours.ANSI_YELLOW);
                 System.out.println("Song not found in the list.");
