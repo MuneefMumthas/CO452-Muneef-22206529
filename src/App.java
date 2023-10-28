@@ -3,6 +3,17 @@ import helpers.InputReader;
 import java.util.HashMap;
 import java.util.Map;
 
+/*This program is designed to emulate the main features of a music streaming 
+service such as Spotify or Apple Music. Developed by Muneef Mumthas (22206529)
+
+Functions Overview:
+- Options(): Handles user interaction and option selection.
+- AddNewSong(): Adds a new song to the list of songs, with details such as title, artist, play count, and year released.
+- displayAllSongs(): Displays all songs in the list in a tabular format.
+- RemoveSong(): Removes a specific song from the list based on user input.
+- DisplaySongsOverPlayCount(): Displays songs with play counts exceeding a specified threshold.
+ */
+
 public class App 
 {
 
