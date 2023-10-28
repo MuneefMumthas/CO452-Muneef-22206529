@@ -27,6 +27,7 @@ public class App
         System.out.println(ConsoleColours.ANSI_RED);
         System.out.println("======================================");
         System.out.println(" CO452 Programming Concepts 2023/2024 ");
+        System.out.println("              Music App               ");
         System.out.println("     by Muneef Mumthas - 22206529     ");
         System.out.println("======================================");
         System.out.println(ConsoleColours.ANSI_CYAN);
