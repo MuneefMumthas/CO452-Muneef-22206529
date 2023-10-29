@@ -179,7 +179,7 @@ public class App
             for (String key : songDetails.keySet()) 
             {
                 String[] details = songDetails.get(key);
-                String formattedPlayCount = String.format("%,d", Integer.parseInt(details[2]));
+                String formattedPlayCount = String.format("%,d", Long.parseLong(details[2]));
                 System.out.println(ConsoleColours.ANSI_CYAN
                         + "-----------------------------------------------------------------------------------");
                 System.out.printf(
@@ -234,7 +234,7 @@ public class App
     public static void DisplaySongsOverPlayCount() 
     {
         /// method to display all songs with plays over a given number
-        int PlayCountThreshold;
+        long PlayCountThreshold;
         if (songDetails.isEmpty()) 
         {
             // error message if the list is empty
@@ -250,7 +250,7 @@ public class App
             {
                 try 
                 {
-                    PlayCountThreshold = Integer.parseInt(InputReader.getString("Play Count Threshold: "));
+                    PlayCountThreshold = Long.parseLong(InputReader.getString("Play Count Threshold: "));
                     break;
                 } 
                 catch (NumberFormatException e) 
@@ -265,7 +265,7 @@ public class App
             for (String key : songDetails.keySet()) 
             {
                 String[] details = songDetails.get(key);
-                int playCount = Integer.parseInt(details[2]);
+                Long playCount = Long.parseLong(details[2]);
                 if (playCount > PlayCountThreshold) 
                 {
                     songsFound = true;
@@ -287,8 +287,8 @@ public class App
                 for (String key : songDetails.keySet()) 
                 {
                     String[] details = songDetails.get(key);
-                    String formattedPlayCount = String.format("%,d", Integer.parseInt(details[2]));
-                    int playCount = Integer.parseInt(details[2]);
+                    String formattedPlayCount = String.format("%,d", Long.parseLong(details[2]));
+                    long playCount = Long.parseLong(details[2]);
 
                     if (playCount > PlayCountThreshold) 
                     {
