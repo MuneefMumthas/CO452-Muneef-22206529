@@ -179,11 +179,12 @@ public class App
             for (String key : songDetails.keySet()) 
             {
                 String[] details = songDetails.get(key);
+                String formattedPlayCount = String.format("%,d", Integer.parseInt(details[2]));
                 System.out.println(ConsoleColours.ANSI_CYAN
                         + "-----------------------------------------------------------------------------------");
                 System.out.printf(
                         "| \u001B[36m%-20s\u001B[40m | \u001B[36m%-20s\u001B[40m | \u001B[36m%-15s\u001B[40m | \u001B[36m%-15s\u001B[40m |\n",
-                        details[0], details[1], details[2], details[3]);
+                        details[0], details[1], formattedPlayCount, details[3]);
             }
             System.out.println("-----------------------------------------------------------------------------------");
         }
@@ -286,6 +287,7 @@ public class App
                 for (String key : songDetails.keySet()) 
                 {
                     String[] details = songDetails.get(key);
+                    String formattedPlayCount = String.format("%,d", Integer.parseInt(details[2]));
                     int playCount = Integer.parseInt(details[2]);
 
                     if (playCount > PlayCountThreshold) 
@@ -294,7 +296,7 @@ public class App
                                 + "-----------------------------------------------------------------------------------");
                         System.out.printf(
                                 "| \u001B[36m%-20s\u001B[40m | \u001B[36m%-20s\u001B[40m | \u001B[36m%-15s\u001B[40m | \u001B[36m%-15s\u001B[40m |\n",
-                                details[0], details[1], details[2], details[3]);
+                                details[0], details[1], formattedPlayCount, details[3]);
                     }
                 }
                 System.out
