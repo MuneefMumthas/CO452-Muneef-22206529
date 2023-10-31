@@ -34,6 +34,29 @@ public class App
         System.out.println();
         System.out.println();
 
+        /// default list of song data by Muneef Mumthas
+        String[] song1 = {"Creepin", "Weeknd & 21 Savage", "1026635895", "2022"};
+        String[] song2 = {"Heat Waves", "Glass Animals", "2699455058", "2020"};
+        String[] song3 = {"Holiday", "KSI", "162871627", "2021"};
+        String[] song4 = {"IDGAF", "Drake (feat. Yeat)", "85805327", "2023"};
+        String[] song5 = {"Jimmy Cooks", "Drake & 21 Savage", "738814390", "2022"};
+        String[] song6 = {"Noticed", "Lil Mosey", "689950012", "2018"};
+        String[] song7 = {"Ordinary Person", "Anirudh", "3120000", "2023"};
+        String[] song8 = {"Pepas", "Farruko", "1373325589", "2021"};
+        String[] song9 = {"The Box", "Roddy Rich", "1723410235", "2019"};
+        String[] song10 = {"Whoopty", "CJ", "734237240", "2020"};
+
+        songDetails.put("Creepin", song1);
+        songDetails.put("Heat Waves", song2);
+        songDetails.put("Holiday", song3);
+        songDetails.put("IDGAF", song4);
+        songDetails.put("Jimmy Cooks", song5);
+        songDetails.put("Noticed", song6);
+        songDetails.put("Ordinary Person", song7);
+        songDetails.put("Pepas", song8);
+        songDetails.put("The Box", song9);
+        songDetails.put("Whoopty", song10);
+
         Options();
     }
 
