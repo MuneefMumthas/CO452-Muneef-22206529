@@ -121,9 +121,10 @@ public class App
 
     public static void AddNewSong() 
     {
-        /// method to add a new song to the list
+        /// Method to add a new song to the list
+        /// This method also allows users to replace an existing song with the same title by entering the title in the same format.
         System.out.println("");
-        System.out.println("Enter the details of the song:");
+        System.out.println("Enter new song details or the existing song name in the same format to replace:");
         System.out.println("");
         String title = InputReader.getString("Title: ");
         String artist = InputReader.getString("Artist: ");
@@ -230,7 +231,7 @@ public class App
         } 
         else 
         {
-            String title = InputReader.getString("Enter the title of the song you want to remove: ");
+            String title = InputReader.getString("Enter the title of the song you want to remove (case sensitive): ");
             if (songDetails.containsKey(title)) 
             {
                 /// confirmation when the song is removed
