@@ -29,6 +29,7 @@
         private System.Windows.Forms.PictureBox Player;
         private System.Windows.Forms.PictureBox Bullet;
         private System.Windows.Forms.PictureBox Enemy3;
+        private System.Windows.Forms.Timer GameTimer;
     }
 }
 

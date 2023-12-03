@@ -2,3 +2,9 @@ C:\Users\avhac\Desktop\University Assignments\Year 1\CO452 - Programming Concept
 C:\Users\avhac\Desktop\University Assignments\Year 1\CO452 - Programming Concepts\CO452-Muneef-22206529\PR1Game\obj\Debug\PR1Game.Properties.Resources.resources
 C:\Users\avhac\Desktop\University Assignments\Year 1\CO452 - Programming Concepts\CO452-Muneef-22206529\PR1Game\obj\Debug\PR1Game.csproj.GenerateResource.cache
 C:\Users\avhac\Desktop\University Assignments\Year 1\CO452 - Programming Concepts\CO452-Muneef-22206529\PR1Game\obj\Debug\PR1Game.csproj.CoreCompileInputs.cache
+C:\Users\avhac\Desktop\University Assignments\Year 1\CO452 - Programming Concepts\CO452-Muneef-22206529\PR1Game\bin\Debug\PR1Game.exe.config
+C:\Users\avhac\Desktop\University Assignments\Year 1\CO452 - Programming Concepts\CO452-Muneef-22206529\PR1Game\bin\Debug\PR1Game.exe
+C:\Users\avhac\Desktop\University Assignments\Year 1\CO452 - Programming Concepts\CO452-Muneef-22206529\PR1Game\bin\Debug\PR1Game.pdb
+C:\Users\avhac\Desktop\University Assignments\Year 1\CO452 - Programming Concepts\CO452-Muneef-22206529\PR1Game\obj\Debug\PR1Game.Form1.resources
+C:\Users\avhac\Desktop\University Assignments\Year 1\CO452 - Programming Concepts\CO452-Muneef-22206529\PR1Game\obj\Debug\PR1Game.exe
+C:\Users\avhac\Desktop\University Assignments\Year 1\CO452 - Programming Concepts\CO452-Muneef-22206529\PR1Game\obj\Debug\PR1Game.pdb

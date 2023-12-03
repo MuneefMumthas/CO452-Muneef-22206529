@@ -12,6 +12,14 @@ namespace PR1Game
 {
     public partial class Form1 : Form
     {
+
+        bool GoLeft, GoRight, Shoot, isGameOver;
+        int score;
+        int playerSpeed = 12;
+        int enemySpeed;
+        int bulletSpeed;
+        Random rnd = new Random();
+
         public Form1()
         {
             InitializeComponent();
@@ -19,6 +27,7 @@ namespace PR1Game
 
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.AmmoLable = new System.Windows.Forms.Label();
             this.ScoreLabel = new System.Windows.Forms.Label();
@@ -29,6 +38,7 @@ namespace PR1Game
             this.Player = new System.Windows.Forms.PictureBox();
             this.Enemy2 = new System.Windows.Forms.PictureBox();
             this.Enemy1 = new System.Windows.Forms.PictureBox();
+            this.GameTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.Enemy3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Bullet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Player)).BeginInit();
@@ -126,6 +136,11 @@ namespace PR1Game
             this.Enemy1.TabIndex = 2;
             this.Enemy1.TabStop = false;
             // 
+            // GameTimer
+            // 
+            this.GameTimer.Interval = 20;
+            this.GameTimer.Tick += new System.EventHandler(this.MainGameTimerEvent);
+            // 
             // Form1
             // 
             this.BackColor = System.Drawing.Color.Khaki;
@@ -141,6 +156,8 @@ namespace PR1Game
             this.Controls.Add(this.AmmoLable);
             this.Name = "Form1";
             this.Text = "Aerial Assault";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyIsDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyIsUp);
             ((System.ComponentModel.ISupportInitialize)(this.Enemy3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Bullet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Player)).EndInit();
@@ -148,6 +165,31 @@ namespace PR1Game
             ((System.ComponentModel.ISupportInitialize)(this.Enemy1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
+        }
+
+        private void MainGameTimerEvent(object sender, EventArgs e)
+        {
+
+        }
+
+        private void KeyIsDown(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void KeyIsUp(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void ResetGame()
+        {
+
+        }
+
+        private void GameOver()
+        {
 
         }
     }
