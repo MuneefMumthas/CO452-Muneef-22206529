@@ -15,7 +15,7 @@ namespace PR1Game
 
         bool GoLeft, GoRight, Shoot, isGameOver;
         int score;
-        int playerSpeed = 12;
+        int playerSpeed = 15;
         int enemySpeed;
         int bulletSpeed;
         Random rnd = new Random();
@@ -23,6 +23,7 @@ namespace PR1Game
         public Form1()
         {
             InitializeComponent();
+            ResetGame();
         }
 
         private void InitializeComponent()
@@ -109,7 +110,7 @@ namespace PR1Game
             // Player
             // 
             this.Player.Image = global::PR1Game.Properties.Resources.Player_Image;
-            this.Player.Location = new System.Drawing.Point(355, 644);
+            this.Player.Location = new System.Drawing.Point(355, 641);
             this.Player.Name = "Player";
             this.Player.Size = new System.Drawing.Size(110, 98);
             this.Player.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -170,22 +171,47 @@ namespace PR1Game
 
         private void MainGameTimerEvent(object sender, EventArgs e)
         {
+            if (GoLeft == true && Player.Left > 0)
+            {
+                Player.Left -= playerSpeed;
+            }
+
+            if (GoRight == true && Player.Left < 694)
+            {
+                Player.Left += playerSpeed;
+            }
 
         }
 
         private void KeyIsDown(object sender, KeyEventArgs e)
         {
+            if (e.KeyCode == Keys.Left)
+            {
+                GoLeft = true;
+            }
 
+            if (e.KeyCode == Keys.Right)
+            {
+               GoRight = true;
+            }
         }
 
         private void KeyIsUp(object sender, KeyEventArgs e)
         {
+            if (e.KeyCode == Keys.Left)
+            {
+                GoLeft = false;
+            }
 
+            if (e.KeyCode == Keys.Right)
+            {
+                GoRight = false;
+            }
         }
 
         private void ResetGame()
         {
-
+            GameTimer.Start();
         }
 
         private void GameOver()
