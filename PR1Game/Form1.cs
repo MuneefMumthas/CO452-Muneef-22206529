@@ -15,7 +15,9 @@ namespace PR1Game
 
         bool GoLeft, GoRight, Shoot, isGameOver;
         int score;
+        int ammo = 10;
         int playerSpeed = 15;
+        int playerHealth = 100;
         int enemySpeed;
         int bulletSpeed;
         Random rnd = new Random();
@@ -146,15 +148,15 @@ namespace PR1Game
             // 
             this.BackColor = System.Drawing.Color.Khaki;
             this.ClientSize = new System.Drawing.Size(804, 751);
-            this.Controls.Add(this.Enemy3);
+            this.Controls.Add(this.HealthBar);
+            this.Controls.Add(this.AmmoLable);
+            this.Controls.Add(this.ScoreLabel);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.Bullet);
             this.Controls.Add(this.Player);
             this.Controls.Add(this.Enemy2);
+            this.Controls.Add(this.Enemy3);
             this.Controls.Add(this.Enemy1);
-            this.Controls.Add(this.HealthBar);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.ScoreLabel);
-            this.Controls.Add(this.AmmoLable);
             this.Name = "Form1";
             this.Text = "Aerial Assault";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyIsDown);
@@ -171,6 +173,23 @@ namespace PR1Game
 
         private void MainGameTimerEvent(object sender, EventArgs e)
         {
+           
+            if (playerHealth > 1)
+            {
+                HealthBar.Value = playerHealth;
+            }
+            else
+            {
+                isGameOver = true;
+            }
+
+            AmmoLable.Text = "Ammo: " + ammo;
+            ScoreLabel.Text = "Score: " + score;
+
+            Enemy1.Top += enemySpeed;
+            Enemy2.Top += enemySpeed;
+            Enemy3.Top += enemySpeed;
+
             if (GoLeft == true && Player.Left > 0)
             {
                 Player.Left -= playerSpeed;
