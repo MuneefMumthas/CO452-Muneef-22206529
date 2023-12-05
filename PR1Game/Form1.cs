@@ -231,6 +231,20 @@ namespace PR1Game
         private void ResetGame()
         {
             GameTimer.Start();
+            enemySpeed = 6;
+
+            Enemy1.Left = rnd.Next(20, 600);
+            Enemy2.Left = rnd.Next(20, 600);
+            Enemy3.Left = rnd.Next(20, 600);
+
+            Enemy1.Top = rnd.Next(0, 200) * -1;
+            Enemy2.Top = rnd.Next(0, 500) * -1;
+            Enemy3.Top = rnd.Next(0, 900) * -1;
+
+            score = 0;
+            bulletSpeed = 0;
+            Bullet.Left = -300;
+
         }
 
         private void GameOver()
