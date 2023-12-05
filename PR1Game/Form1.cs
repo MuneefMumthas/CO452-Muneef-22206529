@@ -10,8 +10,16 @@ using System.Windows.Forms;
 
 namespace PR1Game
 {
+    /// <author>
+    /// Muneef Mumthas - 22206529
+    /// Game Name: Ariel Assault
+    /// </author>
+
     public partial class Form1 : Form
     {
+        ///<summary>
+        /// Booleans, Constants & Variables 
+        ///</summary>
 
         bool GoLeft, GoRight, Shoot, isGameOver;
         int score;
@@ -171,9 +179,16 @@ namespace PR1Game
 
         }
 
+        /// <summary>
+        /// Tick event handler for the Game Timer
+        /// </summary>
         private void MainGameTimerEvent(object sender, EventArgs e)
         {
            
+            /// <summary>
+            /// Connecting health bar value to player health
+            /// and ending the game if the player health goes below 1
+            /// </summary>
             if (playerHealth > 1)
             {
                 HealthBar.Value = playerHealth;
@@ -186,10 +201,16 @@ namespace PR1Game
             AmmoLable.Text = "Ammo: " + ammo;
             ScoreLabel.Text = "Score: " + score;
 
+            /// <summary>
+            /// Movement mechanic for enemy movement
+            /// </summary>
             Enemy1.Top += enemySpeed;
             Enemy2.Top += enemySpeed;
             Enemy3.Top += enemySpeed;
 
+            /// <summary>
+            /// Movement mechanic and boundries for player movement
+            /// </summary>
             if (GoLeft == true && Player.Left > 0)
             {
                 Player.Left -= playerSpeed;
@@ -202,6 +223,11 @@ namespace PR1Game
 
         }
 
+        ///<summary>
+        /// KeyDown event handler.
+        /// When Left & Right keys are pressed,
+        /// the direction booleans are set to true accordingly.
+        ///</summary>
         private void KeyIsDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Left)
@@ -215,6 +241,11 @@ namespace PR1Game
             }
         }
 
+        ///<summary>
+        /// KeyUp event handler.
+        /// when Left & Right keys are released,
+        /// the direction booleans are set to false accordingly.
+        ///</summary>
         private void KeyIsUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Left)
@@ -228,11 +259,15 @@ namespace PR1Game
             }
         }
 
+        ///<summary>
+        /// Method to Reset the game
+        /// </summary>
         private void ResetGame()
         {
             GameTimer.Start();
             enemySpeed = 6;
 
+            /// Boundries for enemy movement
             Enemy1.Left = rnd.Next(20, 600);
             Enemy2.Left = rnd.Next(20, 600);
             Enemy3.Left = rnd.Next(20, 600);
