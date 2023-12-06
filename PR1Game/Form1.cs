@@ -221,7 +221,7 @@ namespace PR1Game
 
             if(Enemy1.Top > 815 || Enemy2.Top > 815 || Enemy3.Top > 815)
             {
-                GameOver();
+               GameOver();
             }
 
             /// <summary>
@@ -237,6 +237,22 @@ namespace PR1Game
                 Player.Left += playerSpeed;
             }
 
+            if (Shoot == true)
+            {
+                bulletSpeed = 30;
+                Bullet.Top -= bulletSpeed;
+
+            }
+            else
+            {
+                Bullet.Left = -300;
+                bulletSpeed = 0;
+            }
+
+            if(Bullet.Top < 30)
+            {
+                Shoot = false;
+            }
         }
 
         ///<summary>
@@ -273,6 +289,13 @@ namespace PR1Game
             {
                 GoRight = false;
             }
+
+            if(e.KeyCode == Keys.Space && Shoot == false)
+            {
+                Shoot = true;
+                Bullet.Top = Player.Top - 30;
+                Bullet.Left = Player.Left + (Player.Width/2);
+            }
         }
 
         ///<summary>
@@ -295,10 +318,12 @@ namespace PR1Game
             score = 0;
             bulletSpeed = 0;
             Bullet.Left = -300;
+            Shoot = false;
 
             Enemy1.Show();
             Enemy2.Show();
             Enemy3.Show();
+            Bullet.Show();
 
             GameFinishedLable.Hide();
 
@@ -312,6 +337,7 @@ namespace PR1Game
             Enemy1.Hide();
             Enemy2.Hide();
             Enemy3.Hide();
+            Bullet.Hide();
 
             GameFinishedLable.Show();
             GameFinishedLable.Text = score +Environment.NewLine +"Game Over !" + Environment.NewLine + "Press Enter to try again";
