@@ -50,6 +50,7 @@ namespace PR1Game
             this.Enemy2 = new System.Windows.Forms.PictureBox();
             this.Enemy1 = new System.Windows.Forms.PictureBox();
             this.GameTimer = new System.Windows.Forms.Timer(this.components);
+            this.GameFinishedLable = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Enemy3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Bullet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Player)).BeginInit();
@@ -152,10 +153,20 @@ namespace PR1Game
             this.GameTimer.Interval = 20;
             this.GameTimer.Tick += new System.EventHandler(this.MainGameTimerEvent);
             // 
+            // GameFinishedLable
+            // 
+            this.GameFinishedLable.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GameFinishedLable.Location = new System.Drawing.Point(1, 330);
+            this.GameFinishedLable.Name = "GameFinishedLable";
+            this.GameFinishedLable.Size = new System.Drawing.Size(804, 149);
+            this.GameFinishedLable.TabIndex = 3;
+            this.GameFinishedLable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Form1
             // 
             this.BackColor = System.Drawing.Color.Khaki;
             this.ClientSize = new System.Drawing.Size(804, 751);
+            this.Controls.Add(this.GameFinishedLable);
             this.Controls.Add(this.HealthBar);
             this.Controls.Add(this.AmmoLable);
             this.Controls.Add(this.ScoreLabel);
@@ -207,6 +218,11 @@ namespace PR1Game
             Enemy1.Top += enemySpeed;
             Enemy2.Top += enemySpeed;
             Enemy3.Top += enemySpeed;
+
+            if(Enemy1.Top > 815 || Enemy2.Top > 815 || Enemy3.Top > 815)
+            {
+                GameOver();
+            }
 
             /// <summary>
             /// Movement mechanic and boundries for player movement
@@ -280,10 +296,25 @@ namespace PR1Game
             bulletSpeed = 0;
             Bullet.Left = -300;
 
+            Enemy1.Show();
+            Enemy2.Show();
+            Enemy3.Show();
+
+            GameFinishedLable.Hide();
+
         }
 
         private void GameOver()
         {
+            isGameOver = true;
+            GameTimer.Stop();
+
+            Enemy1.Hide();
+            Enemy2.Hide();
+            Enemy3.Hide();
+
+            GameFinishedLable.Show();
+            GameFinishedLable.Text = score +Environment.NewLine +"Game Over !" + Environment.NewLine + "Press Enter to try again";
 
         }
     }

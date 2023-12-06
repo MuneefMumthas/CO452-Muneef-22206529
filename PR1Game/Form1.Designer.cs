@@ -30,6 +30,7 @@
         private System.Windows.Forms.PictureBox Bullet;
         private System.Windows.Forms.PictureBox Enemy3;
         private System.Windows.Forms.Timer GameTimer;
+        private System.Windows.Forms.Label GameFinishedLable;
     }
 }
 
