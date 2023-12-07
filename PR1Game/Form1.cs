@@ -237,6 +237,8 @@ namespace PR1Game
                 Player.Left += playerSpeed;
             }
 
+            
+            /// Shooting mechanic
             if (Shoot == true)
             {
                 bulletSpeed = 30;
@@ -251,6 +253,28 @@ namespace PR1Game
 
             if(Bullet.Top < 30)
             {
+                Shoot = false;
+            }
+
+            /// <summary>
+            /// Collision detection between Bullet and Enemy Ships
+            /// </summary>
+            if (Bullet.Bounds.IntersectsWith(Enemy1.Bounds))
+            {
+                Enemy1.Top = -450;
+                Enemy1.Left = rnd.Next(20, 600);
+                Shoot = false;
+            }
+            if (Bullet.Bounds.IntersectsWith(Enemy2.Bounds))
+            {
+                Enemy2.Top = -550;
+                Enemy2.Left = rnd.Next(20, 600);
+                Shoot = false;
+            }
+            if (Bullet.Bounds.IntersectsWith(Enemy3.Bounds))
+            {
+                Enemy3.Top = -650;
+                Enemy3.Left = rnd.Next(20, 600);
                 Shoot = false;
             }
         }
