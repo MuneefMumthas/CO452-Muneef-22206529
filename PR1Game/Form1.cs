@@ -261,18 +261,21 @@ namespace PR1Game
             /// </summary>
             if (Bullet.Bounds.IntersectsWith(Enemy1.Bounds))
             {
+                score += 1;
                 Enemy1.Top = -450;
                 Enemy1.Left = rnd.Next(20, 600);
                 Shoot = false;
             }
             if (Bullet.Bounds.IntersectsWith(Enemy2.Bounds))
             {
+                score += 1;
                 Enemy2.Top = -550;
                 Enemy2.Left = rnd.Next(20, 600);
                 Shoot = false;
             }
             if (Bullet.Bounds.IntersectsWith(Enemy3.Bounds))
             {
+                score += 1;
                 Enemy3.Top = -650;
                 Enemy3.Left = rnd.Next(20, 600);
                 Shoot = false;
