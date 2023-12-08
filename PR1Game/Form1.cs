@@ -176,6 +176,7 @@ namespace PR1Game
             this.Controls.Add(this.Enemy2);
             this.Controls.Add(this.Enemy3);
             this.Controls.Add(this.Enemy1);
+            this.MaximumSize = new System.Drawing.Size(820, 790);
             this.Name = "Form1";
             this.Text = "Aerial Assault";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyIsDown);
@@ -221,7 +222,7 @@ namespace PR1Game
 
             if(Enemy1.Top > 815 || Enemy2.Top > 815 || Enemy3.Top > 815)
             {
-               GameOver();
+                GameOver();
             }
 
             /// <summary>
@@ -262,23 +263,41 @@ namespace PR1Game
             if (Bullet.Bounds.IntersectsWith(Enemy1.Bounds))
             {
                 score += 1;
-                Enemy1.Top = -450;
+                Enemy1.Top = -300;
                 Enemy1.Left = rnd.Next(20, 600);
                 Shoot = false;
             }
             if (Bullet.Bounds.IntersectsWith(Enemy2.Bounds))
             {
                 score += 1;
-                Enemy2.Top = -550;
+                Enemy2.Top = -600;
                 Enemy2.Left = rnd.Next(20, 600);
                 Shoot = false;
             }
             if (Bullet.Bounds.IntersectsWith(Enemy3.Bounds))
             {
                 score += 1;
-                Enemy3.Top = -650;
+                Enemy3.Top = -900;
                 Enemy3.Left = rnd.Next(20, 600);
                 Shoot = false;
+            }
+
+            /// collision between enemies
+
+            if (Enemy1.Bounds.IntersectsWith(Enemy2.Bounds))
+            {
+                Enemy1.Top = -300;
+                Enemy1.Left = rnd.Next(20, 600);
+            }
+            if (Enemy2.Bounds.IntersectsWith(Enemy3.Bounds))
+            {
+                Enemy2.Top = -600;
+                Enemy2.Left = rnd.Next(20, 600);
+            }
+            if (Enemy3.Bounds.IntersectsWith(Enemy1.Bounds))
+            {
+                Enemy3.Top = -900;
+                Enemy3.Left = rnd.Next(20, 600);
             }
         }
 
@@ -317,13 +336,41 @@ namespace PR1Game
                 GoRight = false;
             }
 
-            if(e.KeyCode == Keys.Space && Shoot == false)
+            if(e.KeyCode == Keys.Space && Shoot == false && ammo > 0 && isGameOver == false)
             {
+                ammo--;
                 Shoot = true;
                 Bullet.Top = Player.Top - 30;
                 Bullet.Left = Player.Left + (Player.Width/2);
+
+                if(ammo < 1)
+                {
+                    DropAmmo();
+                }
+            }
+
+            if(e.KeyCode == Keys.Enter && isGameOver == true)
+            {
+                ResetGame();
             }
         }
+
+
+        private void DropAmmo()
+        {
+            PictureBox ammo = new PictureBox();
+            ammo.Image = Properties.Resources.Ammo_Image;
+            ammo.SizeMode = PictureBoxSizeMode.StretchImage;
+            ammo.Size = new Size(60, 60);
+            ammo.Left = rnd.Next(10, this.ClientSize.Width - ammo.Width);
+            ammo.Top = 665;
+            ammo.Tag = "ammo";
+            this.Controls.Add(ammo);
+
+            ammo.BringToFront();
+            Player.BringToFront();
+        }
+
 
         ///<summary>
         /// Method to Reset the game
@@ -331,21 +378,26 @@ namespace PR1Game
         private void ResetGame()
         {
             GameTimer.Start();
-            enemySpeed = 6;
+            enemySpeed = 7;
 
             /// Boundries for enemy movement
+
+            Enemy1.Top = -300;
+            Enemy2.Top = -600;
+            Enemy3.Top = -900;
+
             Enemy1.Left = rnd.Next(20, 600);
             Enemy2.Left = rnd.Next(20, 600);
             Enemy3.Left = rnd.Next(20, 600);
 
-            Enemy1.Top = rnd.Next(0, 200) * -1;
-            Enemy2.Top = rnd.Next(0, 500) * -1;
-            Enemy3.Top = rnd.Next(0, 900) * -1;
+
 
             score = 0;
             bulletSpeed = 0;
             Bullet.Left = -300;
+            ammo = 10;
             Shoot = false;
+            isGameOver = false;
 
             Enemy1.Show();
             Enemy2.Show();
