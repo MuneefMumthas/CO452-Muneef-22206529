@@ -212,11 +212,13 @@ namespace PR1Game
                 isGameOver = true;
             }
 
+            /// Updating the Ammo lable and Score lable as the game progress
             AmmoLable.Text = "Ammo: " + ammo;
             ScoreLabel.Text = "Score: " + score;
 
             /// <summary>
-            /// Movement mechanic for enemy movement
+            /// Movement mechanic and boundries for enemy movement
+            /// when enemy ships go below the form, the game ends.
             /// </summary>
             Enemy1.Top += enemySpeed;
             Enemy2.Top += enemySpeed;
@@ -261,6 +263,8 @@ namespace PR1Game
 
             /// <summary>
             /// Collision detection between Bullet and Enemy Ships
+            /// when they collide, the score is increased by 1 and,
+            /// the position  of the enemy is changed to keep them coming.
             /// </summary>
             if (Bullet.Bounds.IntersectsWith(Enemy1.Bounds))
             {
@@ -284,8 +288,10 @@ namespace PR1Game
                 Shoot = false;
             }
 
-            /// collision between enemies
-
+            /// <summary>
+            /// collision detection between enemies to prevent overlapping/bugs
+            /// when they collide, one of the enemy is placed in a different position.
+            /// </summary>
             if (Enemy1.Bounds.IntersectsWith(Enemy2.Bounds))
             {
                 Enemy1.Top = -300;
@@ -302,6 +308,11 @@ namespace PR1Game
                 Enemy3.Left = rnd.Next(20, 600);
             }
 
+            /// <summary>
+            /// Collision detection between Player and Ammo drops
+            /// when they collide the ammo count increases to 5 and
+            /// ammo image is disposed
+            /// </summary>
             foreach (Control x in this.Controls)
             {
                 if (x is PictureBox && (string)x.Tag == "ammo")
@@ -351,6 +362,11 @@ namespace PR1Game
                 GoRight = false;
             }
 
+            ///<summary>
+            /// When Space key is released while the conditions are true,
+            /// the ammo count is reduced by 1 and Shoot boolean is set to true. 
+            /// when ammo count reaches 0, the DropAmmo method is called.
+            /// </summary>
             if(e.KeyCode == Keys.Space && Shoot == false && ammo > 0 && isGameOver == false)
             {
                 ammo--;
@@ -364,6 +380,7 @@ namespace PR1Game
                 }
             }
 
+            /// Restarts the game when Enter key is pressed and conditions are true
             if(e.KeyCode == Keys.Enter && isGameOver == true)
             {
                 ResetGame();
@@ -371,6 +388,10 @@ namespace PR1Game
         }
 
 
+        /// <summary>
+        /// This method creates a picture box to spawn ammo within the range,
+        /// which can be collected by the player
+        /// </summary>
         private void DropAmmo()
         {
             PictureBox ammo = new PictureBox();
@@ -393,10 +414,8 @@ namespace PR1Game
         private void ResetGame()
         {
             GameTimer.Start();
-            enemySpeed = 7;
 
-            /// Boundries for enemy movement
-
+            /// Reseting positions for enemy ships
             Enemy1.Top = -300;
             Enemy2.Top = -600;
             Enemy3.Top = -900;
@@ -406,8 +425,9 @@ namespace PR1Game
             Enemy3.Left = rnd.Next(20, 600);
 
 
-
+            /// Reseting the variables
             score = 0;
+            enemySpeed = 7;
             bulletSpeed = 0;
             Bullet.Left = -300;
             ammo = 10;
@@ -421,6 +441,7 @@ namespace PR1Game
 
             GameFinishedLable.Hide();
 
+            /// removing any ammo image at the start
             foreach (Control x in this.Controls)
             {
                 if (x is PictureBox && (string)x.Tag == "ammo")
@@ -431,6 +452,11 @@ namespace PR1Game
 
         }
 
+        /// <summary>
+        /// This method ends the game when called.
+        /// it stops the game timer, hides the enemy ships & bullet.
+        /// and shows a text with score and guidance to restart the game.
+        /// </summary>
         private void GameOver()
         {
             isGameOver = true;
