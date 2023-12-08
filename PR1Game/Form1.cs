@@ -176,7 +176,9 @@ namespace PR1Game
             this.Controls.Add(this.Enemy2);
             this.Controls.Add(this.Enemy3);
             this.Controls.Add(this.Enemy1);
+            this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(820, 790);
+            this.MinimumSize = new System.Drawing.Size(820, 790);
             this.Name = "Form1";
             this.Text = "Aerial Assault";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyIsDown);
@@ -299,6 +301,19 @@ namespace PR1Game
                 Enemy3.Top = -900;
                 Enemy3.Left = rnd.Next(20, 600);
             }
+
+            foreach (Control x in this.Controls)
+            {
+                if (x is PictureBox && (string)x.Tag == "ammo")
+                {
+                    if (Player.Bounds.IntersectsWith(x.Bounds))
+                    {
+                        this.Controls.Remove(x);
+                        ((PictureBox)x).Dispose();
+                        ammo += 5;
+                    }
+                }
+            }
         }
 
         ///<summary>
@@ -405,6 +420,14 @@ namespace PR1Game
             Bullet.Show();
 
             GameFinishedLable.Hide();
+
+            foreach (Control x in this.Controls)
+            {
+                if (x is PictureBox && (string)x.Tag == "ammo")
+                {
+                    this.Controls.Remove(x);
+                }
+            }
 
         }
 
