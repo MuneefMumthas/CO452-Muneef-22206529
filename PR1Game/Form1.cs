@@ -33,7 +33,7 @@ namespace PR1Game
         public Form1()
         {
             InitializeComponent();
-            ResetGame();
+            GameStart();
         }
 
         private void InitializeComponent()
@@ -190,6 +190,25 @@ namespace PR1Game
             ((System.ComponentModel.ISupportInitialize)(this.Enemy1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
+        }
+
+        /// <summary>
+        /// This method is called only at the start
+        /// and used to initialise options when the application loads. 
+        /// </summary>
+        private void GameStart()
+        {
+            isGameOver = true;
+            GameTimer.Stop();
+
+            Enemy1.Hide();
+            Enemy2.Hide();
+            Enemy3.Hide();
+            Bullet.Hide();
+
+            GameFinishedLable.Show();
+            GameFinishedLable.Text = "Aerial Assault" + Environment.NewLine + Environment.NewLine + "Press Enter to Start the game";
 
         }
 
