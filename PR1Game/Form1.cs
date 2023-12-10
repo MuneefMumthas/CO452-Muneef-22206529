@@ -24,7 +24,7 @@ namespace PR1Game
         bool GoLeft, GoRight, Shoot, isGameOver;
         int score;
         int ammo = 10;
-        int playerSpeed = 15;
+        int playerSpeed;
         int playerHealth = 100;
         int enemySpeed;
         int bulletSpeed;
@@ -244,7 +244,24 @@ namespace PR1Game
             Enemy2.Top += enemySpeed;
             Enemy3.Top += enemySpeed;
 
-            if(Enemy1.Top > 815 || Enemy2.Top > 815 || Enemy3.Top > 815)
+            /// Increasing speed variables to add difficulty
+            if (score >= 10)
+            {
+                enemySpeed = 10;
+                playerSpeed = 18;
+            }
+            if (score >= 20)
+            {
+                enemySpeed = 12;
+                playerSpeed = 20;
+            }
+            if (score >= 30)
+            {
+                enemySpeed = 15;
+                playerSpeed = 20;
+            }
+
+            if (Enemy1.Top > 815 || Enemy2.Top > 815 || Enemy3.Top > 815)
             {
                 GameOver();
             }
@@ -266,7 +283,7 @@ namespace PR1Game
             /// Shooting mechanic
             if (Shoot == true)
             {
-                bulletSpeed = 30;
+                bulletSpeed = 40;
                 Bullet.Top -= bulletSpeed;
 
             }
@@ -468,6 +485,7 @@ namespace PR1Game
             /// Reseting the variables
             score = 0;
             enemySpeed = 7;
+            playerSpeed = 15;
             bulletSpeed = 0;
             Bullet.Left = -300;
             ammo = 10;
