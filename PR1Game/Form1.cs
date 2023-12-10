@@ -203,13 +203,14 @@ namespace PR1Game
             /// Connecting health bar value to player health
             /// and ending the game if the player health goes below 1
             /// </summary>
-            if (playerHealth > 1)
+            if (playerHealth > 0)
             {
                 HealthBar.Value = playerHealth;
             }
             else
             {
-                isGameOver = true;
+                GameOver();
+                HealthBar.Value = 0;
             }
 
             /// Updating the Ammo lable and Score lable as the game progress
@@ -286,6 +287,26 @@ namespace PR1Game
                 Enemy3.Top = -900;
                 Enemy3.Left = rnd.Next(20, 600);
                 Shoot = false;
+            }
+
+            /// colllision between player and enemy
+            if (Player.Bounds.IntersectsWith(Enemy1.Bounds))
+            {
+                Enemy1.Top = -300;
+                Enemy1.Left = rnd.Next(20, 600);
+                playerHealth -= 10;
+            }
+            if (Player.Bounds.IntersectsWith(Enemy2.Bounds))
+            {
+                Enemy2.Top = -600;
+                Enemy2.Left = rnd.Next(20, 600);
+                playerHealth -= 10;
+            }
+            if (Player.Bounds.IntersectsWith(Enemy3.Bounds))
+            {
+                Enemy3.Top = -900;
+                Enemy3.Left = rnd.Next(20, 600);
+                playerHealth -= 10;
             }
 
             /// <summary>
@@ -431,6 +452,7 @@ namespace PR1Game
             bulletSpeed = 0;
             Bullet.Left = -300;
             ammo = 10;
+            playerHealth = 100;
             Shoot = false;
             isGameOver = false;
 
