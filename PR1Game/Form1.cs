@@ -21,7 +21,7 @@ namespace PR1Game
         /// Booleans, Constants & Variables 
         ///</summary>
 
-        bool GoLeft, GoRight, Shoot, isGameOver;
+        bool GoLeft, GoRight, Shoot, isGameOver, GamePaused;
         int score;
         int ammo = 10;
         int playerSpeed;
@@ -42,7 +42,7 @@ namespace PR1Game
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.AmmoLable = new System.Windows.Forms.Label();
             this.ScoreLabel = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.HealthLable = new System.Windows.Forms.Label();
             this.HealthBar = new System.Windows.Forms.ProgressBar();
             this.Enemy3 = new System.Windows.Forms.PictureBox();
             this.Bullet = new System.Windows.Forms.PictureBox();
@@ -80,16 +80,16 @@ namespace PR1Game
             this.ScoreLabel.TabIndex = 0;
             this.ScoreLabel.Text = "Score: 0";
             // 
-            // label3
+            // HealthLable
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(490, 9);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(72, 20);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Health: ";
+            this.HealthLable.AutoSize = true;
+            this.HealthLable.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.HealthLable.ForeColor = System.Drawing.Color.Black;
+            this.HealthLable.Location = new System.Drawing.Point(490, 9);
+            this.HealthLable.Name = "HealthLable";
+            this.HealthLable.Size = new System.Drawing.Size(67, 20);
+            this.HealthLable.TabIndex = 0;
+            this.HealthLable.Text = "Health:";
             // 
             // HealthBar
             // 
@@ -156,9 +156,9 @@ namespace PR1Game
             // GameFinishedLable
             // 
             this.GameFinishedLable.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GameFinishedLable.Location = new System.Drawing.Point(1, 330);
+            this.GameFinishedLable.Location = new System.Drawing.Point(1, 282);
             this.GameFinishedLable.Name = "GameFinishedLable";
-            this.GameFinishedLable.Size = new System.Drawing.Size(804, 149);
+            this.GameFinishedLable.Size = new System.Drawing.Size(804, 280);
             this.GameFinishedLable.TabIndex = 3;
             this.GameFinishedLable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -166,11 +166,11 @@ namespace PR1Game
             // 
             this.BackColor = System.Drawing.Color.Khaki;
             this.ClientSize = new System.Drawing.Size(804, 751);
-            this.Controls.Add(this.GameFinishedLable);
             this.Controls.Add(this.HealthBar);
-            this.Controls.Add(this.AmmoLable);
+            this.Controls.Add(this.HealthLable);
             this.Controls.Add(this.ScoreLabel);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.AmmoLable);
+            this.Controls.Add(this.GameFinishedLable);
             this.Controls.Add(this.Bullet);
             this.Controls.Add(this.Player);
             this.Controls.Add(this.Enemy2);
@@ -200,16 +200,24 @@ namespace PR1Game
         private void GameStart()
         {
             isGameOver = true;
+            GamePaused = true;
+            
             GameTimer.Stop();
 
             Enemy1.Hide();
             Enemy2.Hide();
             Enemy3.Hide();
+            Player.Hide();
             Bullet.Hide();
 
-            GameFinishedLable.Show();
-            GameFinishedLable.Text = "Aerial Assault" + Environment.NewLine + Environment.NewLine + "Press Enter to Start the game";
+            AmmoLable.Hide();
+            ScoreLabel.Hide();
+            HealthLable.Hide();
+            HealthBar.Hide();
 
+            GameFinishedLable.Show();
+            GameFinishedLable.Text = "Aerial Assault" + Environment.NewLine + "=======================" + Environment.NewLine + "Press Enter to Start the game" + Environment.NewLine + "================================" + Environment.NewLine + "←/→ - Move | Space - Shoot | Esc - Pause"; 
+            GameFinishedLable.Location = new Point(ClientSize.Width / 2 - GameFinishedLable.Width / 2, ClientSize.Height / 2 - GameFinishedLable.Height / 2);
         }
 
         /// <summary>
@@ -424,7 +432,7 @@ namespace PR1Game
             /// the ammo count is reduced by 1 and Shoot boolean is set to true. 
             /// when ammo count reaches 0, the DropAmmo method is called.
             /// </summary>
-            if(e.KeyCode == Keys.Space && Shoot == false && ammo > 0 && isGameOver == false)
+            if(e.KeyCode == Keys.Space && Shoot == false && ammo > 0 && isGameOver == false && GamePaused == false)
             {
                 ammo--;
                 Shoot = true;
@@ -437,10 +445,45 @@ namespace PR1Game
                 }
             }
 
-            /// Restarts the game when Enter key is pressed and conditions are true
+            /// Restarts the game when Enter key is released and conditions are true
             if(e.KeyCode == Keys.Enter && isGameOver == true)
             {
                 ResetGame();
+            }
+            else if (e.KeyCode == Keys.Enter && GamePaused == true && isGameOver == false)
+            {
+                ResetGame();
+            }
+
+            if (e.KeyCode == Keys.Escape && GamePaused == false && isGameOver == false)
+            {
+                GameTimer.Stop();
+                GamePaused = true;
+
+                Enemy1.Hide();
+                Enemy2.Hide();
+                Enemy3.Hide();
+                Player.Hide();
+                Bullet.Hide();
+
+                GameFinishedLable.Show();
+                GameFinishedLable.Text = "Game Paused !" + Environment.NewLine +"======================"+ Environment.NewLine + "Press Enter to Restart" + Environment.NewLine + "======================" + Environment.NewLine + "Press Escape to Resume";
+                GameFinishedLable.Location = new Point(ClientSize.Width / 2 - GameFinishedLable.Width / 2, ClientSize.Height / 2 - GameFinishedLable.Height / 2);
+
+
+            }
+            else if(e.KeyCode == Keys.Escape && GamePaused == true && isGameOver == false)
+            {
+                GamePaused = false;
+                GameTimer.Start();
+
+                Enemy1.Show();
+                Enemy2.Show();
+                Enemy3.Show();
+                Player.Show();
+                Bullet.Show();
+
+                GameFinishedLable.Hide();
             }
         }
 
@@ -481,6 +524,9 @@ namespace PR1Game
             Enemy2.Left = rnd.Next(20, 600);
             Enemy3.Left = rnd.Next(20, 600);
 
+            /// Reseting player position
+            Player.Top = 641;
+            Player.Left = 355;
 
             /// Reseting the variables
             score = 0;
@@ -492,11 +538,18 @@ namespace PR1Game
             playerHealth = 100;
             Shoot = false;
             isGameOver = false;
+            GamePaused = false;
 
             Enemy1.Show();
             Enemy2.Show();
             Enemy3.Show();
+            Player.Show();
             Bullet.Show();
+
+            AmmoLable.Show();
+            ScoreLabel.Show();
+            HealthLable.Show();
+            HealthBar.Show();
 
             GameFinishedLable.Hide();
 
@@ -524,11 +577,17 @@ namespace PR1Game
             Enemy1.Hide();
             Enemy2.Hide();
             Enemy3.Hide();
+            Player.Hide();
             Bullet.Hide();
 
-            GameFinishedLable.Show();
-            GameFinishedLable.Text = score +Environment.NewLine +"Game Over !" + Environment.NewLine + "Press Enter to try again";
+            AmmoLable.Hide();
+            ScoreLabel.Hide();
+            HealthLable.Hide();
+            HealthBar.Hide();
 
+            GameFinishedLable.Show();
+            GameFinishedLable.Text = "Game Over !" + Environment.NewLine + "======================" +Environment.NewLine + "Your Score is "+ score + Environment.NewLine + "======================" + Environment.NewLine + "Press Enter to Try Again";
+            GameFinishedLable.Location = new Point(ClientSize.Width / 2 - GameFinishedLable.Width / 2, ClientSize.Height / 2 - GameFinishedLable.Height / 2);
         }
     }
 }

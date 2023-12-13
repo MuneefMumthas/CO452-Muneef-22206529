@@ -22,7 +22,7 @@
 
         private System.Windows.Forms.Label AmmoLable;
         private System.Windows.Forms.Label ScoreLabel;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label HealthLable;
         private System.Windows.Forms.ProgressBar HealthBar;
         private System.Windows.Forms.PictureBox Enemy1;
         private System.Windows.Forms.PictureBox Enemy2;
