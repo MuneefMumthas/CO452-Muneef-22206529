@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Media;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +30,8 @@ namespace PR1Game
         int enemySpeed;
         int bulletSpeed;
         Random rnd = new Random();
+
+        SoundPlayer killSound = new SoundPlayer(Properties.Resources.LaserGunKillSound);
 
         public Form1()
         {
@@ -317,6 +320,7 @@ namespace PR1Game
                 Enemy1.Top = -300;
                 Enemy1.Left = rnd.Next(20, 600);
                 Shoot = false;
+                killSound.Play();
             }
             if (Bullet.Bounds.IntersectsWith(Enemy2.Bounds))
             {
@@ -324,6 +328,7 @@ namespace PR1Game
                 Enemy2.Top = -600;
                 Enemy2.Left = rnd.Next(20, 600);
                 Shoot = false;
+                killSound.Play();
             }
             if (Bullet.Bounds.IntersectsWith(Enemy3.Bounds))
             {
@@ -331,6 +336,7 @@ namespace PR1Game
                 Enemy3.Top = -900;
                 Enemy3.Left = rnd.Next(20, 600);
                 Shoot = false;
+                killSound.Play();
             }
 
             /// colllision between player and enemy

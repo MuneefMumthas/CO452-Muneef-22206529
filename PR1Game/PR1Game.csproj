@@ -98,5 +98,8 @@
   <ItemGroup>
     <None Include="Images for PR1\Ammo.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LaserGunKillSound.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
