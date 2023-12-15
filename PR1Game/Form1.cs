@@ -31,12 +31,23 @@ namespace PR1Game
         int bulletSpeed;
         Random rnd = new Random();
 
+        // Initialising the short sounds
         SoundPlayer killSound = new SoundPlayer(Properties.Resources.LaserGunKillSound);
+
+        
 
         public Form1()
         {
             InitializeComponent();
             GameStart();
+            
+            // Initialising the background music
+            BackgroundMusicPlayer.URL = @"BackgroundMusicVengence.MP3";
+            BackgroundMusicPlayer.settings.playCount = 9999;
+            BackgroundMusicPlayer.Ctlcontrols.stop();
+
+            ReloadingSound.URL = @"ReloadingSoundEffect.wav";
+            ReloadingSound.Ctlcontrols.stop();
         }
 
         private void InitializeComponent()
@@ -47,18 +58,22 @@ namespace PR1Game
             this.ScoreLabel = new System.Windows.Forms.Label();
             this.HealthLable = new System.Windows.Forms.Label();
             this.HealthBar = new System.Windows.Forms.ProgressBar();
-            this.Enemy3 = new System.Windows.Forms.PictureBox();
+            this.GameTimer = new System.Windows.Forms.Timer(this.components);
+            this.GameFinishedLable = new System.Windows.Forms.Label();
+            this.BackgroundMusicPlayer = new AxWMPLib.AxWindowsMediaPlayer();
             this.Bullet = new System.Windows.Forms.PictureBox();
             this.Player = new System.Windows.Forms.PictureBox();
             this.Enemy2 = new System.Windows.Forms.PictureBox();
+            this.Enemy3 = new System.Windows.Forms.PictureBox();
             this.Enemy1 = new System.Windows.Forms.PictureBox();
-            this.GameTimer = new System.Windows.Forms.Timer(this.components);
-            this.GameFinishedLable = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.Enemy3)).BeginInit();
+            this.ReloadingSound = new AxWMPLib.AxWindowsMediaPlayer();
+            ((System.ComponentModel.ISupportInitialize)(this.BackgroundMusicPlayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Bullet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Player)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Enemy2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Enemy3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Enemy1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ReloadingSound)).BeginInit();
             this.SuspendLayout();
             // 
             // AmmoLable
@@ -101,15 +116,29 @@ namespace PR1Game
             this.HealthBar.Size = new System.Drawing.Size(224, 23);
             this.HealthBar.TabIndex = 1;
             // 
-            // Enemy3
+            // GameTimer
             // 
-            this.Enemy3.Image = ((System.Drawing.Image)(resources.GetObject("Enemy3.Image")));
-            this.Enemy3.Location = new System.Drawing.Point(615, 99);
-            this.Enemy3.Name = "Enemy3";
-            this.Enemy3.Size = new System.Drawing.Size(110, 98);
-            this.Enemy3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.Enemy3.TabIndex = 2;
-            this.Enemy3.TabStop = false;
+            this.GameTimer.Interval = 20;
+            this.GameTimer.Tick += new System.EventHandler(this.MainGameTimerEvent);
+            // 
+            // GameFinishedLable
+            // 
+            this.GameFinishedLable.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GameFinishedLable.Location = new System.Drawing.Point(1, 282);
+            this.GameFinishedLable.Name = "GameFinishedLable";
+            this.GameFinishedLable.Size = new System.Drawing.Size(804, 280);
+            this.GameFinishedLable.TabIndex = 3;
+            this.GameFinishedLable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // BackgroundMusicPlayer
+            // 
+            this.BackgroundMusicPlayer.Enabled = true;
+            this.BackgroundMusicPlayer.Location = new System.Drawing.Point(338, 363);
+            this.BackgroundMusicPlayer.Name = "BackgroundMusicPlayer";
+            this.BackgroundMusicPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("BackgroundMusicPlayer.OcxState")));
+            this.BackgroundMusicPlayer.Size = new System.Drawing.Size(140, 61);
+            this.BackgroundMusicPlayer.TabIndex = 4;
+            this.BackgroundMusicPlayer.Visible = false;
             // 
             // Bullet
             // 
@@ -141,6 +170,16 @@ namespace PR1Game
             this.Enemy2.TabIndex = 2;
             this.Enemy2.TabStop = false;
             // 
+            // Enemy3
+            // 
+            this.Enemy3.Image = ((System.Drawing.Image)(resources.GetObject("Enemy3.Image")));
+            this.Enemy3.Location = new System.Drawing.Point(615, 99);
+            this.Enemy3.Name = "Enemy3";
+            this.Enemy3.Size = new System.Drawing.Size(110, 98);
+            this.Enemy3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.Enemy3.TabIndex = 2;
+            this.Enemy3.TabStop = false;
+            // 
             // Enemy1
             // 
             this.Enemy1.Image = ((System.Drawing.Image)(resources.GetObject("Enemy1.Image")));
@@ -151,24 +190,22 @@ namespace PR1Game
             this.Enemy1.TabIndex = 2;
             this.Enemy1.TabStop = false;
             // 
-            // GameTimer
+            // ReloadingSound
             // 
-            this.GameTimer.Interval = 20;
-            this.GameTimer.Tick += new System.EventHandler(this.MainGameTimerEvent);
-            // 
-            // GameFinishedLable
-            // 
-            this.GameFinishedLable.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GameFinishedLable.Location = new System.Drawing.Point(1, 282);
-            this.GameFinishedLable.Name = "GameFinishedLable";
-            this.GameFinishedLable.Size = new System.Drawing.Size(804, 280);
-            this.GameFinishedLable.TabIndex = 3;
-            this.GameFinishedLable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ReloadingSound.Enabled = true;
+            this.ReloadingSound.Location = new System.Drawing.Point(598, 401);
+            this.ReloadingSound.Name = "ReloadingSound";
+            this.ReloadingSound.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("ReloadingSound.OcxState")));
+            this.ReloadingSound.Size = new System.Drawing.Size(127, 56);
+            this.ReloadingSound.TabIndex = 5;
+            this.ReloadingSound.Visible = false;
             // 
             // Form1
             // 
-            this.BackColor = System.Drawing.Color.Khaki;
+            this.BackColor = System.Drawing.Color.Gray;
             this.ClientSize = new System.Drawing.Size(804, 751);
+            this.Controls.Add(this.ReloadingSound);
+            this.Controls.Add(this.BackgroundMusicPlayer);
             this.Controls.Add(this.HealthBar);
             this.Controls.Add(this.HealthLable);
             this.Controls.Add(this.ScoreLabel);
@@ -186,11 +223,13 @@ namespace PR1Game
             this.Text = "Aerial Assault";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyIsDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyIsUp);
-            ((System.ComponentModel.ISupportInitialize)(this.Enemy3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BackgroundMusicPlayer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Bullet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Player)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Enemy2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Enemy3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Enemy1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ReloadingSound)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -393,6 +432,7 @@ namespace PR1Game
                         this.Controls.Remove(x);
                         ((PictureBox)x).Dispose();
                         ammo += 5;
+                        ReloadingSound.Ctlcontrols.play();
                     }
                 }
             }
@@ -465,6 +505,7 @@ namespace PR1Game
             {
                 GameTimer.Stop();
                 GamePaused = true;
+                BackgroundMusicPlayer.Ctlcontrols.pause();
 
                 Enemy1.Hide();
                 Enemy2.Hide();
@@ -482,6 +523,7 @@ namespace PR1Game
             {
                 GamePaused = false;
                 GameTimer.Start();
+                BackgroundMusicPlayer.Ctlcontrols.play();
 
                 Enemy1.Show();
                 Enemy2.Show();
@@ -520,6 +562,8 @@ namespace PR1Game
         private void ResetGame()
         {
             GameTimer.Start();
+            BackgroundMusicPlayer.Ctlcontrols.stop();
+            BackgroundMusicPlayer.Ctlcontrols.play();
 
             /// Reseting positions for enemy ships
             Enemy1.Top = -300;
@@ -579,6 +623,9 @@ namespace PR1Game
         {
             isGameOver = true;
             GameTimer.Stop();
+            BackgroundMusicPlayer.Ctlcontrols.stop();
+            ReloadingSound.Ctlcontrols.stop();
+            killSound.Stop();
 
             Enemy1.Hide();
             Enemy2.Hide();

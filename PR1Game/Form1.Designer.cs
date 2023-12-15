@@ -31,6 +31,8 @@
         private System.Windows.Forms.PictureBox Enemy3;
         private System.Windows.Forms.Timer GameTimer;
         private System.Windows.Forms.Label GameFinishedLable;
+        private AxWMPLib.AxWindowsMediaPlayer BackgroundMusicPlayer;
+        private AxWMPLib.AxWindowsMediaPlayer ReloadingSound;
     }
 }
 
