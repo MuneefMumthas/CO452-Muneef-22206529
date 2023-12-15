@@ -31,7 +31,7 @@ namespace PR1Game
         int bulletSpeed;
         Random rnd = new Random();
 
-        // Initialising the short sounds
+        // Initialising the Kill sound
         SoundPlayer killSound = new SoundPlayer(Properties.Resources.LaserGunKillSound);
 
         
@@ -41,11 +41,12 @@ namespace PR1Game
             InitializeComponent();
             GameStart();
             
-            // Initialising the background music
+            // Initialising the Background Music
             BackgroundMusicPlayer.URL = @"BackgroundMusicVengence.MP3";
             BackgroundMusicPlayer.settings.playCount = 9999;
             BackgroundMusicPlayer.Ctlcontrols.stop();
 
+            // Initialising the Reloading sound
             ReloadingSound.URL = @"ReloadingSoundEffect.wav";
             ReloadingSound.Ctlcontrols.stop();
         }
@@ -307,10 +308,11 @@ namespace PR1Game
             }
             if (score >= 30)
             {
-                enemySpeed = 15;
-                playerSpeed = 20;
+                enemySpeed = 14;
+                playerSpeed = 22;
             }
 
+            /// boundries for enemy ships
             if (Enemy1.Top > 815 || Enemy2.Top > 815 || Enemy3.Top > 815)
             {
                 GameOver();
@@ -501,6 +503,7 @@ namespace PR1Game
                 ResetGame();
             }
 
+            /// Pauses the game when the escape key is released and conditions are true
             if (e.KeyCode == Keys.Escape && GamePaused == false && isGameOver == false)
             {
                 GameTimer.Stop();
@@ -519,7 +522,8 @@ namespace PR1Game
 
 
             }
-            else if(e.KeyCode == Keys.Escape && GamePaused == true && isGameOver == false)
+            /// Resumes the game when the escape key is released and conditions are true
+            else if (e.KeyCode == Keys.Escape && GamePaused == true && isGameOver == false)
             {
                 GamePaused = false;
                 GameTimer.Start();
@@ -632,6 +636,13 @@ namespace PR1Game
             Enemy3.Hide();
             Player.Hide();
             Bullet.Hide();
+            foreach (Control x in this.Controls)
+            {
+                if (x is PictureBox && (string)x.Tag == "ammo")
+                {
+                    this.Controls.Remove(x);
+                }
+            }
 
             AmmoLable.Hide();
             ScoreLabel.Hide();
