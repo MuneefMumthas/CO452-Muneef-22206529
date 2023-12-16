@@ -112,6 +112,7 @@ namespace PR1Game
             // 
             // HealthBar
             // 
+            this.HealthBar.ForeColor = System.Drawing.Color.Gray;
             this.HealthBar.Location = new System.Drawing.Point(558, 9);
             this.HealthBar.Name = "HealthBar";
             this.HealthBar.Size = new System.Drawing.Size(224, 23);
@@ -217,6 +218,7 @@ namespace PR1Game
             this.Controls.Add(this.Enemy2);
             this.Controls.Add(this.Enemy3);
             this.Controls.Add(this.Enemy1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(820, 790);
             this.MinimumSize = new System.Drawing.Size(820, 790);
