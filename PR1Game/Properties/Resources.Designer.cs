@@ -81,6 +81,16 @@ namespace PR1Game.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon Custom_Logo_for_Aerial_Assault {
+            get {
+                object obj = ResourceManager.GetObject("Custom_Logo_for_Aerial_Assault", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Enemy_Image {

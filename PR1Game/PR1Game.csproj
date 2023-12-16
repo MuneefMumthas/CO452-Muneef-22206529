@@ -123,5 +123,11 @@
   <ItemGroup>
     <None Include="Resources\ReloadingSoundEffect.wav" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icon1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Custom-Logo-for-Aerial-Assault.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

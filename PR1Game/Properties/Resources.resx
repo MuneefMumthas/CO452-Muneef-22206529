@@ -133,4 +133,7 @@
   <data name="LaserGunKillSound" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LaserGunKillSound.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Custom_Logo_for_Aerial_Assault" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Custom-Logo-for-Aerial-Assault.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
